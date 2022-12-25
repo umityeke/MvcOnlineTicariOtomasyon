@@ -1,0 +1,57 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@model List<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+@using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+{
+    <p>
+        Ürün Adı : @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>Ürün</th>
+        <th>Marka</th>
+        <th>Stok</th>
+        <th>Alış Fiyat</th>
+        <th>Satış Fiyat</th>
+        <th>Kategori</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th> Detay</th>
+        <th>Satış Yap</th>
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.UrunAd</td>
+            <td>@u.Marka</td>
+            <td>@u.Stok</td>
+            <td>@u.AlisFiyat ₺</td>
+            <td>@u.SatisFiyat ₺</td>
+            <td>@u.Kategori.KategoriAd</td>
+            <td><a href="/Urun/UrunSil/@u.Urunid" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Sil</a></td>
+            <td> <a href="/Urun/UrunGetir/@u.Urunid" class="btn btn-outline-warning"><i class="fa fa-undo"></i>Güncelle</a></td>
+            <td><a href="/UrunDetay/Index/@u.Urunid" class="btn btn-outline-primary">Detay</a></td>
+            <td> <a href="/Urun/SatisYap/@u.Urunid" class="btn btn-outline-success"><i class="fa fa-print"></i> Satış Yap</a></td>
+
+        </tr>
+    }
+</table>
+<a href="/Urun/YeniUrun" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Yeni Ürün Ekle</a>
+<a href="/Urun/UrunListesi" class="btn btn-outline-info"><i class="fa fa-print"></i> Yazdır</a>
+
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+<script>
+    $('#tbl1').dataTable({});
+</script>
+
